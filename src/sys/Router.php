@@ -1,15 +1,15 @@
 <?php
 
-
 namespace Sys;
+
+use App\Controllers\ErrorController;
 
 class Router
 {
-
     private static $url;
     private static $controller;
     private static $method;
-    private static $params = [];
+    private static $params;
     private static $request_method;
 
     public static function init()
@@ -24,7 +24,7 @@ class Router
     {
         if(isset(self::$url[0])) {
             if(self::$url[0] == ""){
-                self::$controller = "DefaultController";
+                self::$controller = "HomeController";
             }else{
                 self::$controller = ucfirst(self::$url[0])."Controller";
             }
@@ -38,10 +38,7 @@ class Router
 
         if(isset(self::$url[2]))
         {
-            for ($i = 2;$i < count(self::$url);$i++)
-            {
-                array_push(self::$params,self::$url[$i]);
-            }
+            self::$params = self::$url[2];
         }
         if(self::$request_method === "POST") self::request_is_post();
         else self::request_is_get();
@@ -63,7 +60,7 @@ class Router
 
         if(file_exists($path_file_controller)) {
             if (method_exists("App\\Controllers\\" . self::$controller, self::$method)) {
-                if (sizeof(self::$params) > 0) {
+                if (self::$params) {
                     call_user_func(array("App\\Controllers\\" . self::$controller, self::$method), self::$params);
                 } else {
                     call_user_func(array("App\\Controllers\\" . self::$controller, self::$method));
@@ -73,11 +70,9 @@ class Router
                 die();
             }
         }
-        else
-        {
+        else {
             ErrorController::show404();
         }
-
     }
 
 
