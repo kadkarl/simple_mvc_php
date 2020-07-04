@@ -10,7 +10,7 @@ class Router
     private static $controller;
     private static $method;
     private static $params;
-    private static $request_method;
+    public static $request_method;
 
     public static function init()
     {
@@ -43,16 +43,6 @@ class Router
         self::call_controller_and_method();
     }
 
-    private static function request_is_get()
-    {
-        call_user_func(array("App\\Controllers\\" . self::$controller, self::$method), self::$params);
-    }
-
-    private static function request_is_post()
-    {
-        echo "Methode POST";
-    }
-
     private static function call_controller_and_method()
     {
         $path_file_controller = CONTROLLERS_PATH.self::$controller.".php";
@@ -60,13 +50,8 @@ class Router
         if(file_exists($path_file_controller)) {
             if (method_exists("App\\Controllers\\" . self::$controller, self::$method)) {
                 if (self::$params) {
-                    if(self::$request_method === "GET")
-                    {
-                        self::request_is_get();
-                    }else{
-                        self::request_is_post();
-                    }
-                } else {
+                    call_user_func(array("App\\Controllers\\" . self::$controller, self::$method), self::$params);
+                }else{
                     call_user_func(array("App\\Controllers\\" . self::$controller, self::$method));
                 }
             } else {

@@ -14,6 +14,10 @@
                        <a class="nav-link text-white" href="<?= SITE_URL ?>nobel/all">Tous les prix nobels <span class="sr-only">(current)</span></a>
                    </li>
                </ul>
+               <form class="form-inline my-2 my-lg-0" action="<?= SITE_URL ?>" method="post">
+                   <input class="form-control mr-sm-2" type="text" name="id_nobel" placeholder="Rechercher par N°..">
+                   <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
+               </form>
            </div>
        </div>
     </nav>
