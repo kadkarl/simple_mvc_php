@@ -1,3 +1,4 @@
 <?php
 
-echo "<h3>Default view</h3>";
+echo "<h3>Index view $id, $title_page</h3>";
+
