@@ -2,11 +2,13 @@
 
 namespace App\Controllers;
 
-class HomeController
+use Sys\AbstractController;
+
+class HomeController extends AbstractController
 {
     public static function index($id)
     {
-       var_dump($id);
+        self::render("index");
     }
 
 }
