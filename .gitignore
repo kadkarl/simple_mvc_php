@@ -1,3 +1,5 @@
 /vendor/
 
 /.idea/
+
+Db_Config.php
