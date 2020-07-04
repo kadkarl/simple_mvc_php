@@ -40,13 +40,12 @@ class Router
         {
             self::$params = self::$url[2];
         }
-        if(self::$request_method === "POST") self::request_is_post();
-        else self::request_is_get();
+        self::call_controller_and_method();
     }
 
     private static function request_is_get()
     {
-        self::call_controller_and_method();
+        call_user_func(array("App\\Controllers\\" . self::$controller, self::$method), self::$params);
     }
 
     private static function request_is_post()
@@ -61,7 +60,12 @@ class Router
         if(file_exists($path_file_controller)) {
             if (method_exists("App\\Controllers\\" . self::$controller, self::$method)) {
                 if (self::$params) {
-                    call_user_func(array("App\\Controllers\\" . self::$controller, self::$method), self::$params);
+                    if(self::$request_method === "GET")
+                    {
+                        self::request_is_get();
+                    }else{
+                        self::request_is_post();
+                    }
                 } else {
                     call_user_func(array("App\\Controllers\\" . self::$controller, self::$method));
                 }
