@@ -16,7 +16,7 @@ class AbstractModel
 
     public static function init()
     {
-        $db_config = require_once ROOT_PATH."Db_Config.php";
+        $db_config = require_once ROOT_PATH."Database.php";
 
         if(self::$db == null)
         {

@@ -15,7 +15,6 @@ class Constants
         define("CONTROLLERS_PATH",APP_PATH."Controllers"."/");
         define("MODELS_PATH",APP_PATH."Models"."/");
         define("VIEWS_PATH",APP_PATH."Views"."/");
-        define("PUBLIC_PATH",ROOT_PATH."public"."/");
-        define("ASSETS_PATH",PUBLIC_PATH."assets"."/");
+        define("ASSETS",$_SERVER["REQUEST_URI"]."public/assets");
     }
 }
