@@ -76,6 +76,7 @@ class Router
         }
         else {
             ErrorController::show404();
+            throw new \Exception("Le controlleur " . self::$controller . " n'existe pas, dans le dossier ".CONTROLLERS_PATH);
         }
     }
 
