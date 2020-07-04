@@ -1,0 +1,17 @@
+{
+    "name": "kad/simple_mvc",
+    "authors": [
+        {
+            "name": "Bendahmane",
+            "email": "abkder@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/",
+            "App\\": "src/app/",
+            "Sys\\": "src/sys/"
+        }
+    },
+    "require": {}
+}
