@@ -2,18 +2,32 @@
 
 namespace Sys;
 
+use PDO;
+
+/**
+ * Pattern Singleton
+ * Class AbstractModel
+ * @package Sys
+ */
 
 class AbstractModel
 {
-    private static $instance;
-    private static  $db;
+    public static  $db;
 
     public static function init()
     {
         $db_config = require_once ROOT_PATH."Db_Config.php";
 
-        var_dump($db_config);
-
+        if(self::$db == null)
+        {
+            try {
+                self::$db = new PDO($db_config['dsn'],$db_config['user'],$db_config['password']);
+            }catch (\Exception $ex)
+            {
+                throw new \Exception("Database Error : ".$ex->getMessage());
+            }
+        }
+        return self::$db;
     }
 
 }

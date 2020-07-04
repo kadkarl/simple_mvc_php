@@ -1,7 +1,13 @@
 <?php
 
+namespace App\Models;
 
-class DefaultModel
+/**
+ * Class DefaultModel
+ * @package App\Models
+ */
+class DefaultModel extends \Sys\AbstractModel
 {
+
 
 }
