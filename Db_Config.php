@@ -1,7 +1,10 @@
 <?php
 
+/**
+ * Database Config
+ */
 return [
-    "host" => "localhost",
-    "username" => "root",
-    "password" => "root"
+    "dsn" => "mysql:dbname=tp_site_prix_nobel_php;host=127.0.0.1:3306",
+    "user" => "kad",
+    "password" => "Abkder!77"
 ];

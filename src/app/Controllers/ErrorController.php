@@ -2,6 +2,11 @@
 
 namespace App\Controllers;
 
+/**
+ * Default Error Controller
+ * Class ErrorController
+ * @package App\Controllers
+ */
 class ErrorController
 {
 
