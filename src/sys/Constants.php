@@ -1,6 +1,6 @@
 <?php
 
-namespace Sys\Constants;
+namespace Sys;
 
 class Constants
 {
