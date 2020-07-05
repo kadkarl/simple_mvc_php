@@ -11,6 +11,6 @@ class NobelModelTest extends TestCase
     {
         $this->assertEquals(20, 10 + 10);
     }
-    
+
 
 }
