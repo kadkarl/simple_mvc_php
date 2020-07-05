@@ -13,5 +13,8 @@
             "Sys\\": "src/sys/"
         }
     },
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
 }
