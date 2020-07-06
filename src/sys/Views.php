@@ -17,8 +17,9 @@ class Views
                 require_once $path_view;
                 return $data;
                 ob_end_clean();
+            }else{
+                require_once $path_view;
             }
-            require_once $path_view;
         }else{
             throw new \Exception("La vue $view n'existe pas dans le dossier ".VIEWS_PATH);
         }
