@@ -4,6 +4,10 @@ namespace Sys;
 
 use App\Controllers\ErrorController;
 
+/**
+ * Class Router
+ * @package Sys
+ */
 class Router
 {
     private static $url;
@@ -12,14 +16,21 @@ class Router
     private static $params;
     public static $request_method;
 
+    /**
+     * Initialise le router
+     */
     public static function init()
     {
-        self::$url = rtrim(self::$url,"/");
+        self::$url = parse_url(rtrim(self::$url,"/"));
         self::$url = explode("/", $_GET['url']);
         self::$request_method = $_SERVER['REQUEST_METHOD'];
         self::dispatch_url();
     }
 
+    /**
+     * @throws \Exception
+     * Dispatcher URL
+     */
     private static function dispatch_url()
     {
         if(isset(self::$url[0])) {
@@ -43,6 +54,10 @@ class Router
         self::call_controller_and_method();
     }
 
+    /**
+     * @throws \Exception
+     *Gestion des controllers et methodes
+     */
     private static function call_controller_and_method()
     {
         $path_file_controller = CONTROLLERS_PATH.self::$controller.".php";
@@ -62,6 +77,7 @@ class Router
         else {
             ErrorController::show404();
             throw new \Exception("Le controlleur " . self::$controller . " n'existe pas, dans le dossier ".CONTROLLERS_PATH);
+            die();
         }
     }
 
