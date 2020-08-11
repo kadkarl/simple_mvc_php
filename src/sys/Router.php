@@ -21,8 +21,8 @@ class Router
      */
     public static function init()
     {
-        self::$url = parse_url(rtrim(self::$url,"/"));
         self::$url = explode("/", $_GET['url']);
+        self::$url = parse_url(rtrim(self::$url, "/"));
         self::$request_method = $_SERVER['REQUEST_METHOD'];
         self::dispatch_url();
     }
@@ -33,22 +33,21 @@ class Router
      */
     private static function dispatch_url()
     {
-        if(isset(self::$url[0])) {
-            if(self::$url[0] == ""){
+        if (isset(self::$url[0])) {
+            if (self::$url[0] == "") {
                 self::$controller = "HomeController";
-            }else{
-                self::$controller = ucfirst(self::$url[0])."Controller";
+            } else {
+                self::$controller = ucfirst(self::$url[0]) . "Controller";
             }
         }
 
-        if(isset(self::$url[1])) {
+        if (isset(self::$url[1])) {
             self::$method = self::$url[1];
-        }else{
+        } else {
             self::$method = "index";
         }
 
-        if(isset(self::$url[2]))
-        {
+        if (isset(self::$url[2])) {
             self::$params = self::$url[2];
         }
         self::call_controller_and_method();
@@ -60,27 +59,23 @@ class Router
      */
     private static function call_controller_and_method()
     {
-        $path_file_controller = CONTROLLERS_PATH.self::$controller.".php";
+        $path_file_controller = CONTROLLERS_PATH . self::$controller . ".php";
 
-        if(file_exists($path_file_controller)) {
+        if (file_exists($path_file_controller)) {
             if (method_exists("App\\Controllers\\" . self::$controller, self::$method)) {
                 if (self::$params) {
                     call_user_func(array("App\\Controllers\\" . self::$controller, self::$method), self::$params);
-                }else{
+                } else {
                     call_user_func(array("App\\Controllers\\" . self::$controller, self::$method));
                 }
             } else {
                 throw new \Exception("La methode " . self::$method . " n'existe pas dans le controller : " . self::$controller);
                 die();
             }
-        }
-        else {
+        } else {
             ErrorController::show404();
-            throw new \Exception("Le controlleur " . self::$controller . " n'existe pas, dans le dossier ".CONTROLLERS_PATH);
+            throw new \Exception("Le controlleur " . self::$controller . " n'existe pas, dans le dossier " . CONTROLLERS_PATH);
             die();
         }
     }
-
-
-    
 }
