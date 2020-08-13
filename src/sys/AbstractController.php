@@ -2,7 +2,7 @@
 
 namespace Sys;
 
-class AbstractController
+abstract class AbstractController
 {
     public static function render(string $view, array $vars = null)
     {
