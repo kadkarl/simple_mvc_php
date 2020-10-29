@@ -25,7 +25,6 @@ abstract class AbstractModel
             }catch (\Exception $ex)
             {
                 throw new \Exception("Database Error : ".$ex->getMessage());
-                die();
             }
         }
         return self::$db;
